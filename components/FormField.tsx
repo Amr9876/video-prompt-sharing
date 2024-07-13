@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { IFormField } from "@/interfaces/IFormField";
-import { icons, images } from "@/constants";
+import { icons } from "@/constants";
 
 const FormField = ({
   onTextChange,
