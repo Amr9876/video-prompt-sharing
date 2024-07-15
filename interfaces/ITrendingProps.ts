@@ -1,3 +1,10 @@
+import { Models } from "react-native-appwrite";
+
 export interface ITrendingProps {
-  posts: any[];
+  posts: Models.Document[];
+}
+
+export interface ITrendingItemProps {
+  activeItem: string;
+  item: Models.Document;
 }

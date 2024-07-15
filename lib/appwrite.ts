@@ -57,6 +57,7 @@ export const createUser = async (
     return newUser;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -67,6 +68,7 @@ export const signIn = async (email: string, password: string) => {
     return session;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -100,5 +102,61 @@ export const getAllPosts = async () => {
     return posts.documents;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getLatestPosts = async () => {
+  try {
+    const posts = await db.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videosCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(7)]
+    );
+
+    return posts.documents;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const searchPosts = async (query: string) => {
+  try {
+    const posts = await db.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videosCollectionId,
+      [Query.search("title", query)]
+    );
+
+    return posts.documents;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const getUserPosts = async (userId: string) => {
+  try {
+    const posts = await db.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videosCollectionId,
+      [Query.equal("creator", userId)]
+    );
+
+    return posts.documents;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const signOut = async () => {
+  try {
+    const session = await account.deleteSession("current");
+
+    return session;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
